@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Prime Care Services — In-Home &amp; Companion Care, Abbotsford BC</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#0d0f14;
+  --ink2:#1c2033;
+  --sage:#3d6b5e;
+  --sage-light:#4e8a7a;
+  --sage-pale:#eaf2ef;
+  --sand:#c9a96e;
+  --sand-light:#e2c99a;
+  --off:#f7f5f1;
+  --white:#ffffff;
+  --muted:#6b7280;
+  --border:#e4e0d8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;}
+
+.cursor{width:8px;height:8px;background:var(--sage);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:transform 0.15s;mix-blend-mode:multiply;}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:76px;
+  background:rgba(247,245,241,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;}
+.logo-mark{
+  width:36px;height:36px;
+  border:1.5px solid var(--sage);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--sage);
+}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--ink);}
+.logo-name sup{font-family:'Outfit',sans-serif;font-size:0.5rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);vertical-align:super;margin-left:2px;}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none;}
+.nav-links a{font-size:0.85rem;font-weight:400;color:var(--muted);text-decoration:none;letter-spacing:0.02em;transition:color 0.2s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-btn{background:var(--ink)!important;color:var(--white)!important;padding:10px 24px;border-radius:4px;font-size:0.82rem!important;font-weight:500!important;letter-spacing:0.04em;text-transform:uppercase;transition:background 0.2s!important;}
+.nav-btn:hover{background:var(--sage)!important;}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding:76px 0 0;position:relative;overflow:hidden;}
+.hero-left{padding:9% 5% 8% 6%;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);margin-bottom:28px;opacity:0;animation:up 0.7s 0.1s ease forwards;}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--sage);}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5vw,5.2rem);font-weight:600;line-height:1.04;color:var(--ink);margin-bottom:28px;opacity:0;animation:up 0.7s 0.2s ease forwards;}
+.hero h1 i{color:var(--sage);font-style:italic;}
+.hero-desc{font-size:1rem;line-height:1.78;color:var(--muted);max-width:420px;margin-bottom:44px;font-weight:300;opacity:0;animation:up 0.7s 0.3s ease forwards;}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:up 0.7s 0.4s ease forwards;}
+.btn-dark{background:var(--ink);color:var(--white);padding:14px 30px;border-radius:4px;font-size:0.85rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;transition:background 0.2s,transform 0.15s;display:inline-flex;align-items:center;gap:9px;}
+.btn-dark:hover{background:var(--sage);transform:translateY(-2px);}
+.btn-ghost{background:transparent;color:var(--ink);padding:14px 24px;border-radius:4px;font-size:0.85rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;border:1px solid var(--border);transition:border-color 0.2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-ghost:hover{border-color:var(--ink);}
+.hero-meta{display:flex;gap:32px;margin-top:52px;padding-top:32px;border-top:1px solid var(--border);opacity:0;animation:up 0.7s 0.5s ease forwards;}
+.meta-val{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--ink);line-height:1;}
+.meta-lbl{font-size:0.68rem;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+.hero-right{position:relative;overflow:hidden;opacity:0;animation:fadeIn 1s 0.3s ease forwards;}
+.hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,#c8dcd8 0%,#8fbdb5 40%,var(--sage) 100%);z-index:0;}
+.hero-img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1;mix-blend-mode:multiply;opacity:0.7;}
+.hero-tag{position:absolute;z-index:3;background:var(--white);border-radius:6px;padding:18px 22px;box-shadow:0 20px 60px rgba(13,15,20,0.14);}
+.hero-tag-1{bottom:60px;left:-28px;animation:cardFloat 3.5s ease-in-out infinite;}
+.hero-tag-2{top:80px;right:28px;animation:cardFloat 3.5s 1.5s ease-in-out infinite;}
+.tag-label{font-size:0.68rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.tag-value{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--ink);}
+.tag-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--sage);margin-right:6px;animation:pulse 2s ease infinite;}
+
+/* STRIP */
+.strip{background:var(--ink);padding:18px 0;overflow:hidden;white-space:nowrap;}
+.strip-track{display:inline-block;animation:marquee 30s linear infinite;font-size:0.72rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);}
+.strip-track .sep{color:var(--sand);margin:0 24px;font-size:0.6rem;}
+
+/* INTRO */
+.intro{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;}
+.intro-img-col{aspect-ratio:4/5;position:relative;overflow:hidden;background:var(--sage-pale);}
+.intro-img-col img{width:100%;height:100%;object-fit:cover;}
+.intro-text-col{padding:8% 7%;}
+.intro-kicker{font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.intro-kicker::after{content:'';flex:1;height:1px;background:var(--border);max-width:40px;}
+.intro h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,3.5vw,3.6rem);font-weight:600;line-height:1.1;color:var(--ink);margin-bottom:22px;}
+.intro p{font-size:0.95rem;line-height:1.82;color:var(--muted);font-weight:300;margin-bottom:36px;}
+.intro-list{display:flex;flex-direction:column;gap:14px;}
+.intro-list-item{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;background:var(--off);border-radius:6px;border-left:3px solid var(--sage);transition:background 0.2s;}
+.intro-list-item:hover{background:var(--sage-pale);}
+.ili-icon{font-size:1.1rem;margin-top:1px;flex-shrink:0;}
+.ili-text strong{display:block;font-size:0.88rem;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.ili-text span{font-size:0.82rem;color:var(--muted);}
+
+/* SERVICES */
+.services{padding:110px 6%;background:var(--off);}
+.services-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;gap:40px;flex-wrap:wrap;}
+.s-eyebrow{font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.s-eyebrow::before{content:'';width:24px;height:1px;background:var(--sage);}
+.services-top h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,3.5vw,3.4rem);font-weight:600;line-height:1.1;color:var(--ink);}
+.services-top-right{max-width:360px;font-size:0.92rem;color:var(--muted);line-height:1.75;font-weight:300;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.svc-card{background:var(--white);padding:44px 38px;position:relative;overflow:hidden;transition:background 0.3s;cursor:default;}
+.svc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--sage);transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
+.svc-card:hover{background:var(--ink);}
+.svc-card:hover::after{transform:scaleX(1);}
+.svc-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:400;color:var(--border);line-height:1;margin-bottom:20px;transition:color 0.3s;}
+.svc-card:hover .svc-num{color:rgba(255,255,255,0.06);}
+.svc-icon{font-size:1.6rem;margin-bottom:16px;display:block;}
+.svc-card h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--ink);margin-bottom:12px;transition:color 0.3s;}
+.svc-card:hover h3{color:var(--white);}
+.svc-card p{font-size:0.86rem;line-height:1.72;color:var(--muted);font-weight:300;transition:color 0.3s;}
+.svc-card:hover p{color:rgba(255,255,255,0.5);}
+.svc-card-featured{background:var(--sage);}
+.svc-card-featured .svc-num{color:rgba(255,255,255,0.12);}
+.svc-card-featured h3{color:var(--white);}
+.svc-card-featured p{color:rgba(255,255,255,0.75);}
+.svc-card-featured:hover{background:var(--ink);}
+.svc-card-wide{grid-column:span 3;display:flex;align-items:center;gap:0;background:var(--ink2);}
+.svc-card-wide .wide-left{flex:1;padding:44px 38px;}
+.svc-card-wide .wide-left .svc-num{color:rgba(255,255,255,0.08);}
+.svc-card-wide .wide-left h3{color:var(--white);}
+.svc-card-wide .wide-left p{color:rgba(255,255,255,0.5);}
+.svc-card-wide .wide-right{flex:1;padding:44px 48px;font-size:0.86rem;color:rgba(255,255,255,0.45);line-height:1.8;font-weight:300;border-left:1px solid rgba(255,255,255,0.07);}
+.svc-card-wide:hover{background:var(--ink2);}
+
+/* PROCESS */
+.process{padding:110px 6%;background:var(--white);}
+.process-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:72px;}
+.process-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,3.5vw,3.4rem);font-weight:600;line-height:1.1;color:var(--ink);}
+.process-head p{font-size:0.92rem;color:var(--muted);line-height:1.78;font-weight:300;}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.step{padding:40px 32px;background:var(--off);position:relative;overflow:hidden;transition:background 0.3s;}
+.step:hover{background:var(--sage-pale);}
+.step-n{font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:400;color:var(--border);line-height:0.9;margin-bottom:24px;display:block;transition:color 0.3s;}
+.step:hover .step-n{color:rgba(61,107,94,0.2);}
+.step h4{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:10px;}
+.step p{font-size:0.83rem;color:var(--muted);line-height:1.7;font-weight:300;}
+.step-arrow{position:absolute;top:32px;right:32px;font-size:1.2rem;color:var(--border);transition:color 0.3s,transform 0.3s;}
+.step:hover .step-arrow{color:var(--sage);transform:translate(3px,-3px);}
+
+/* TESTIMONIALS */
+.testimonials{padding:110px 6%;background:var(--ink);position:relative;overflow:hidden;}
+.testimonials::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(61,107,94,0.15) 0%,transparent 70%);pointer-events:none;}
+.test-eyebrow{font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--sand);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.test-eyebrow::before{content:'';width:24px;height:1px;background:var(--sand);}
+.test-head{margin-bottom:64px;}
+.test-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,3.5vw,3.4rem);font-weight:600;color:var(--white);line-height:1.1;}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.test-card{padding:40px 36px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);transition:background 0.3s;}
+.test-card:hover{background:rgba(255,255,255,0.07);}
+.test-stars{color:var(--sand);font-size:0.8rem;letter-spacing:3px;margin-bottom:20px;}
+.test-card blockquote{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:400;font-style:italic;color:rgba(255,255,255,0.75);line-height:1.7;margin-bottom:28px;}
+.test-reviewer{display:flex;align-items:center;gap:12px;}
+.rev-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;}
+.rev-name{font-size:0.85rem;font-weight:600;color:var(--white);}
+.rev-loc{font-size:0.74rem;color:rgba(255,255,255,0.4);margin-top:2px;letter-spacing:0.04em;}
+
+/* COVERAGE */
+.coverage{background:var(--off);padding:90px 6%;display:flex;align-items:center;justify-content:space-between;gap:60px;flex-wrap:wrap;}
+.cov-left{max-width:480px;}
+.cov-eyebrow{font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.cov-eyebrow::before{content:'';width:24px;height:1px;background:var(--sage);}
+.cov-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,3rem);font-weight:600;line-height:1.1;color:var(--ink);margin-bottom:16px;}
+.cov-left p{font-size:0.9rem;color:var(--muted);line-height:1.78;font-weight:300;}
+.cov-areas{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
+.area-tag{padding:9px 18px;background:var(--white);border:1px solid var(--border);border-radius:3px;font-size:0.8rem;font-weight:500;color:var(--ink);transition:all 0.2s;}
+.area-tag.active{background:var(--sage);color:var(--white);border-color:var(--sage);}
+.area-tag:hover{border-color:var(--sage);color:var(--sage);}
+.cov-stats{display:flex;flex-direction:column;gap:16px;}
+.cov-stat{padding:28px 32px;background:var(--white);border-radius:6px;border:1px solid var(--border);}
+.cov-stat-val{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;color:var(--sage);}
+.cov-stat-lbl{font-size:0.72rem;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+
+/* CTA */
+.cta{padding:110px 6%;background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.cta-eyebrow{font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.cta-eyebrow::before{content:'';width:24px;height:1px;background:var(--sage);}
+.cta-left h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,3.5vw,3.6rem);font-weight:600;line-height:1.1;color:var(--ink);margin-bottom:20px;}
+.cta-left p{font-size:0.92rem;color:var(--muted);line-height:1.78;font-weight:300;margin-bottom:36px;}
+.cta-form{background:var(--off);border-radius:8px;padding:40px;border:1px solid var(--border);}
+.cta-form h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.cta-form .form-sub{font-size:0.82rem;color:var(--muted);margin-bottom:28px;font-weight:300;}
+.form-field{margin-bottom:16px;}
+.form-field label{display:block;font-size:0.7rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.form-field input,.form-field select{width:100%;padding:12px 14px;background:var(--white);border:1px solid var(--border);border-radius:4px;font-family:'Outfit',sans-serif;font-size:0.88rem;color:var(--ink);outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
+.form-field input:focus,.form-field select:focus{border-color:var(--sage);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-submit{width:100%;padding:14px;background:var(--ink);color:var(--white);border:none;border-radius:4px;font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;margin-top:8px;transition:background 0.2s;}
+.form-submit:hover{background:var(--sage);}
+.form-note{font-size:0.72rem;color:var(--muted);text-align:center;margin-top:10px;font-weight:300;}
+
+/* FOOTER */
+footer{background:var(--ink2);padding:64px 6% 28px;}
+.foot-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:52px;}
+.foot-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--white);margin-bottom:12px;}
+.foot-brand-desc{font-size:0.83rem;color:rgba(255,255,255,0.4);line-height:1.72;font-weight:300;max-width:270px;}
+.foot-contact{margin-top:24px;}
+.foot-ci{display:flex;gap:10px;align-items:flex-start;font-size:0.82rem;color:rgba(255,255,255,0.45);margin-bottom:10px;}
+.foot-ci a{color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s;}
+.foot-ci a:hover{color:var(--sage-light);}
+.foot-col h5{font-size:0.7rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px;}
+.foot-col ul{list-style:none;}
+.foot-col ul li{margin-bottom:11px;}
+.foot-col ul li a{font-size:0.83rem;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s;font-weight:300;}
+.foot-col ul li a:hover{color:var(--white);}
+.foot-bottom{border-top:1px solid rgba(255,255,255,0.07);padding-top:22px;display:flex;justify-content:space-between;align-items:center;font-size:0.74rem;color:rgba(255,255,255,0.25);}
+.foot-bottom a{color:rgba(255,255,255,0.35);text-decoration:none;}
+
+@keyframes up{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(1.4);}}
+@keyframes cardFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .intro{grid-template-columns:1fr;}
+  .intro-img-col{display:none;}
+  .services-grid{grid-template-columns:1fr 1fr;}
+  .svc-card-wide{grid-column:span 2;}
+  .steps{grid-template-columns:1fr 1fr;}
+  .test-grid{grid-template-columns:1fr;}
+  .cta{grid-template-columns:1fr;}
+  .foot-top{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  .nav-links{display:none;}
+  .services-grid{grid-template-columns:1fr;}
+  .svc-card-wide{grid-column:span 1;flex-direction:column;}
+  .svc-card-wide .wide-right{border-left:none;padding-left:38px;padding-top:0;border-top:1px solid rgba(255,255,255,0.07);}
+  .steps{grid-template-columns:1fr;}
+  .process-head{grid-template-columns:1fr;}
+  .foot-top{grid-template-columns:1fr;}
+  .foot-bottom{flex-direction:column;gap:6px;text-align:center;}
+  .form-row{grid-template-columns:1fr;}
+  .coverage{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-mark">PC</div>
+    <div class="logo-name">Prime Care <sup>Services</sup></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#careers">Careers</a></li>
+    <li><a href="#contact" class="nav-btn">Free Consultation</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Abbotsford &amp; Fraser Valley, BC</div>
+    <h1>Care That Feels<br/>Like <i>Coming Home</i></h1>
+    <p class="hero-desc">Prime Care Services brings premium in-home and companion care to seniors across Abbotsford — delivered by clinically trained professionals who treat every client like family.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-dark">Book a Free Consultation →</a>
+      <a href="#services" class="btn-ghost">Our Services</a>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-val">RN</div>
+        <div class="meta-lbl">Led Care Teams</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">24/7</div>
+        <div class="meta-lbl">Care Available</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">BC</div>
+        <div class="meta-lbl">Licensed &amp; Insured</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">ਪੰਜਾਬੀ</div>
+        <div class="meta-lbl">Multilingual Staff</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-img" src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=900&q=80" alt="Compassionate home caregiver"/>
+    <div class="hero-tag hero-tag-1">
+      <div class="tag-label">Currently Accepting</div>
+      <div class="tag-value"><span class="tag-dot"></span>New Clients</div>
+    </div>
+    <div class="hero-tag hero-tag-2">
+      <div class="tag-label">Starting With</div>
+      <div class="tag-value">Free Consultation</div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip" aria-hidden="true">
+  <span class="strip-track">
+    In-Home Care <span class="sep">◆</span> Companion Care <span class="sep">◆</span> Personal Care Assistance <span class="sep">◆</span> Medication Management <span class="sep">◆</span> Respite Care <span class="sep">◆</span> Meal Preparation <span class="sep">◆</span> Dementia Support <span class="sep">◆</span> Post-Surgery Recovery <span class="sep">◆</span> Mobility Assistance <span class="sep">◆</span> LTC Locum Staffing <span class="sep">◆</span> In-Home Care <span class="sep">◆</span> Companion Care <span class="sep">◆</span> Personal Care Assistance <span class="sep">◆</span> Medication Management <span class="sep">◆</span> Respite Care <span class="sep">◆</span> Meal Preparation <span class="sep">◆</span> Dementia Support <span class="sep">◆</span> Post-Surgery Recovery <span class="sep">◆</span> Mobility Assistance <span class="sep">◆</span> LTC Locum Staffing <span class="sep">◆</span>
+  </span>
+</div>
+
+<!-- ABOUT -->
+<section class="intro" id="about">
+  <div class="intro-img-col">
+    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=700&q=80" alt="Prime Care caregiver with senior"/>
+  </div>
+  <div class="intro-text-col">
+    <div class="intro-kicker">Who We Are</div>
+    <h2>Rooted in Healthcare.<br/>Built on Trust.</h2>
+    <p>Prime Care Services was founded as a specialized locum staffing agency for long-term care homes across BC. That clinical foundation — RNs, LPNs, and certified HCAs — is now brought directly into the homes of seniors and families who deserve more than standard care.</p>
+    <div class="intro-list">
+      <div class="intro-list-item">
+        <span class="ili-icon">🏥</span>
+        <div class="ili-text">
+          <strong>Clinical-Grade Professionals</strong>
+          <span>Our team includes Registered Nurses, Licensed Practical Nurses, and certified Health Care Assistants.</span>
+        </div>
+      </div>
+      <div class="intro-list-item">
+        <span class="ili-icon">🛡️</span>
+        <div class="ili-text">
+          <strong>Fully Screened &amp; Insured</strong>
+          <span>Every caregiver holds a Vulnerable Sector Check and is covered under Prime Care's comprehensive insurance.</span>
+        </div>
+      </div>
+      <div class="intro-list-item">
+        <span class="ili-icon">🌏</span>
+        <div class="ili-text">
+          <strong>Multilingual &amp; Culturally Aware</strong>
+          <span>Punjabi-speaking staff and a team that reflects and respects the rich diversity of Abbotsford's community.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-top">
+    <div>
+      <div class="s-eyebrow">What We Offer</div>
+      <h2>Two Core Services.<br/>One Trusted Team.</h2>
+    </div>
+    <div class="services-top-right">Every service Prime Care provides is built around one goal — helping your loved one remain safely and comfortably at home, for as long as possible.</div>
+  </div>
+  <div class="services-grid">
+    <div class="svc-card svc-card-featured">
+      <div class="svc-num">01</div>
+      <span class="svc-icon">🏠</span>
+      <h3>In-Home Care</h3>
+      <p>Comprehensive daily support including personal care, bathing, dressing, grooming, medication management, meal preparation, and mobility assistance — all in the comfort of home.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">02</div>
+      <span class="svc-icon">🫶</span>
+      <h3>Companion Care</h3>
+      <p>Meaningful social visits, recreational engagement, accompaniment to appointments, and emotional support — because connection is just as essential as physical care.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">03</div>
+      <span class="svc-icon">😴</span>
+      <h3>Respite Care</h3>
+      <p>Temporary, high-quality relief for family caregivers. We step in so you can rest and recharge, confident your loved one is in expert hands.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">04</div>
+      <span class="svc-icon">💊</span>
+      <h3>Medication Management</h3>
+      <p>Trained caregivers handle medication reminders, dosage tracking, and prescription coordination with clinical precision.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">05</div>
+      <span class="svc-icon">🩺</span>
+      <h3>Post-Surgery Recovery</h3>
+      <p>Skilled in-home support following hospital discharge — ensuring a safe, smooth recovery with professional monitoring every step of the way.</p>
+    </div>
+    <div class="svc-card-wide svc-card">
+      <div class="wide-left">
+        <div class="svc-num">+</div>
+        <h3>Not Sure What You Need?</h3>
+        <p>Every family situation is different. Our free consultation helps you find exactly the right level of care — no pressure, no obligation.</p>
+        <a href="#contact" class="btn-dark" style="margin-top:24px;display:inline-flex;background:var(--sage);">Book a Free Consultation →</a>
+      </div>
+      <div class="wide-right">
+        We also provide <strong style="color:rgba(255,255,255,0.7);">LTC Locum Staffing</strong> — placing RNs, LPNs, HCAs, Cooks, and Housekeepers with long-term care facilities across British Columbia. If you are a healthcare facility looking for reliable, qualified locum staff, we would love to connect.
+        <br/><br/>
+        <a href="mailto:admin@primecares.ca" style="color:var(--sage-light);font-weight:500;font-size:0.85rem;">Contact us about LTC staffing →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-head">
+    <div>
+      <div class="s-eyebrow">Getting Started</div>
+      <h2>From First Call to First Visit in Four Steps</h2>
+    </div>
+    <p>Starting care should never feel overwhelming. We have made the process simple, transparent, and built entirely around your family's timeline — not ours.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <span class="step-n">01</span>
+      <div class="step-arrow">↗</div>
+      <h4>Free Consultation</h4>
+      <p>Call, email, or fill out our form. We arrange a no-pressure conversation at your convenience — by phone or in person in Abbotsford.</p>
+    </div>
+    <div class="step">
+      <span class="step-n">02</span>
+      <div class="step-arrow">↗</div>
+      <h4>In-Home Assessment</h4>
+      <p>We visit your loved one's home, document their care needs, safety considerations, and personal preferences in a detailed care plan.</p>
+    </div>
+    <div class="step">
+      <span class="step-n">03</span>
+      <div class="step-arrow">↗</div>
+      <h4>Caregiver Matching</h4>
+      <p>We carefully match your loved one with the right caregiver — considering skills, language, schedule, and personal compatibility.</p>
+    </div>
+    <div class="step">
+      <span class="step-n">04</span>
+      <div class="step-arrow">↗</div>
+      <h4>Care Begins</h4>
+      <p>Care starts on your timeline. We check in with your family regularly and adjust the care plan as your loved one's needs evolve.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="test-head">
+    <div class="test-eyebrow">Client Stories</div>
+    <h2>Families Who Trust Prime Care</h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <blockquote>"The caregiver assigned to my mother was so patient and kind — and she speaks Punjabi, which made my mom feel completely at ease. Prime Care felt like family from the very first visit."</blockquote>
+      <div class="test-reviewer">
+        <div class="rev-av" style="background:rgba(61,107,94,0.2);color:var(--sage-light);">H</div>
+        <div>
+          <div class="rev-name">Harpreet S.</div>
+          <div class="rev-loc">Daughter of client · Abbotsford, BC</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <blockquote>"After my dad came home from hospital we were completely overwhelmed. Prime Care stepped in quickly, assessed his situation, and had a caregiver with him within two days. Truly exceptional."</blockquote>
+      <div class="test-reviewer">
+        <div class="rev-av" style="background:rgba(201,169,110,0.15);color:var(--sand);">M</div>
+        <div>
+          <div class="rev-name">Michael T.</div>
+          <div class="rev-loc">Son of client · Abbotsford, BC</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <blockquote>"As a family caregiver myself I needed someone I could truly trust. Prime Care gave me that peace of mind. The professionalism here is genuinely a cut above anything else I found."</blockquote>
+      <div class="test-reviewer">
+        <div class="rev-av" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);">S</div>
+        <div>
+          <div class="rev-name">Sandra L.</div>
+          <div class="rev-loc">Family caregiver · Mission, BC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COVERAGE -->
+<section class="coverage">
+  <div class="cov-left">
+    <div class="cov-eyebrow">Where We Serve</div>
+    <h2>Starting in Abbotsford.<br/>Growing Across BC.</h2>
+    <p>Prime Care's in-home and companion care services are currently centred in Abbotsford, with planned expansion across the Fraser Valley and greater BC through 2025 and 2026.</p>
+    <div class="cov-areas">
+      <span class="area-tag active">Abbotsford ✓</span>
+      <span class="area-tag">Mission</span>
+      <span class="area-tag">Chilliwack</span>
+      <span class="area-tag">Langley</span>
+      <span class="area-tag">Surrey</span>
+      <span class="area-tag">Fraser Valley</span>
+    </div>
+  </div>
+  <div class="cov-stats">
+    <div class="cov-stat">
+      <div class="cov-stat-val">BC-Wide</div>
+      <div class="cov-stat-lbl">LTC Locum Staffing Network</div>
+    </div>
+    <div class="cov-stat">
+      <div class="cov-stat-val">24 / 7</div>
+      <div class="cov-stat-lbl">Care Availability</div>
+    </div>
+    <div class="cov-stat">
+      <div class="cov-stat-val">Free</div>
+      <div class="cov-stat-lbl">Initial Consultation — No Obligation</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta" id="contact">
+  <div class="cta-left">
+    <div class="cta-eyebrow">Get In Touch</div>
+    <h2>Let's Find the Right Care for Your Family.</h2>
+    <p>A short conversation is all it takes. We will listen carefully, answer every question, and put together a plan that fits — on your timeline, within your budget.</p>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <a href="tel:+16048651727" class="btn-dark" style="width:fit-content;">📞 Call Us Directly</a>
+      <a href="mailto:admin@primecares.ca" class="btn-ghost" style="width:fit-content;">✉️ admin@primecares.ca</a>
+    </div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:24px;font-weight:300;">We typically respond within a few hours during business hours.</p>
+  </div>
+  <div class="cta-form">
+    <h3>Request a Free Consultation</h3>
+    <p class="form-sub">Fill in your details and we will be in touch shortly.</p>
+    <div class="form-row">
+      <div class="form-field">
+        <label>First Name</label>
+        <input type="text" placeholder="Jane"/>
+      </div>
+      <div class="form-field">
+        <label>Last Name</label>
+        <input type="text" placeholder="Smith"/>
+      </div>
+    </div>
+    <div class="form-field">
+      <label>Phone Number</label>
+      <input type="tel" placeholder="(604) 865-1727"/>
+    </div>
+    <div class="form-field">
+      <label>Email Address</label>
+      <input type="email" placeholder="jane@email.com"/>
+    </div>
+    <div class="form-field">
+      <label>Service Needed</label>
+      <select>
+        <option>In-Home Care</option>
+        <option>Companion Care</option>
+        <option>Respite Care</option>
+        <option>Post-Surgery Recovery</option>
+        <option>Not Sure — Need Guidance</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label>Your City</label>
+      <input type="text" placeholder="Abbotsford"/>
+    </div>
+    <button class="form-submit">Request My Free Consultation</button>
+    <p class="form-note">No obligation. No pressure. Just a conversation.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="careers">
+  <div class="foot-top">
+    <div>
+      <div class="foot-brand-name">Prime Care Services</div>
+      <p class="foot-brand-desc">Compassionate in-home care and companion care in Abbotsford, BC — and locum healthcare staffing across British Columbia.</p>
+      <div class="foot-contact">
+        <div class="foot-ci">📍 <span>Abbotsford, BC, Canada</span></div>
+        <div class="foot-ci">🌐 <a href="https://primecares.ca">primecares.ca</a></div>
+        <div class="foot-ci">✉️ <a href="mailto:admin@primecares.ca">admin@primecares.ca</a></div>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#">In-Home Care</a></li>
+        <li><a href="#">Companion Care</a></li>
+        <li><a href="#">Respite Care</a></li>
+        <li><a href="#">Post-Surgery Recovery</a></li>
+        <li><a href="#">LTC Locum Staffing</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Training &amp; Resources</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Support</h5>
+      <ul>
+        <li><a href="#">Free Consultation</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQ for Families</a></li>
+        <li><a href="#">FAQ for Caregivers</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2025 Prime Care Services Inc. All rights reserved.</span>
+    <span>Made with care for BC families · <a href="https://primecares.ca">primecares.ca</a></span>
+  </div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = (e.clientX - 4) + 'px';
+  cursor.style.top  = (e.clientY - 4) + 'px';
+});
+document.querySelectorAll('a,button,.svc-card,.step,.test-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(3)');
+  el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.style.opacity = '1';
+   
